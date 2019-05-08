@@ -21,14 +21,22 @@
 
 #include <AL/al.h>
 #include <AL/alc.h>
+#include <AL/alut.h>
+
+#include <string>
 
 
 namespace ChipGen 
 {
+    /************
+    *  DEVICE  *
+    ************/
+    
     class Device
     {
         private:
             ALCdevice *device;
+            ALCcontext *context;
         public:
             Device();
            ~Device();
@@ -36,6 +44,42 @@ namespace ChipGen
             int init();
             static void list_devices(const ALCchar* devices);
     };
+
+    /***********
+    *  TRACK  *
+    ***********/
+
+    class Track
+    {
+        private:
+            ALuint buffer, source;
+            ALint source_state;
+        public:
+            Track(std::string);
+            ~Track();
+
+            void play();
+            void loop();
+            bool playing();
+            
+            void setPitch(float);
+            void setGain(float);
+            void setPosition(float, float, float);
+            void setVelocity(float, float, float);
+    };
+
+    /**************
+    *  LISTENER  *
+    **************/
+    class Listener
+    {
+        private:
+        public:
+            void setPosition(float, float, float);
+            void setVelocity(float, float, float);
+            void setOrientation(float[]);
+    };
+    
 
 }
 

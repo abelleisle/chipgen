@@ -8,7 +8,7 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 FLAGS = -m64 -std=c++17 -Wall -Werror -Wextra -Wpedantic -g
 REL_FLAGS = -O2
-LIBS = -lopenal
+LIBS = -lopenal -lalut
 INCS = -Isrc
 
 EXEC = main
