@@ -22,7 +22,6 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
-#include <cstddef>
 
 namespace ChipGen 
 {
@@ -35,6 +34,7 @@ namespace ChipGen
            ~Device();
 
             int init();
+            static void list_devices(const ALCchar* devices);
     };
 
 }
