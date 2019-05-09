@@ -37,6 +37,7 @@ namespace ChipGen
     Device::Device()
     {
         alutInit(0, NULL);
+        alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
 
         alGetError();
     }
@@ -121,7 +122,20 @@ namespace ChipGen
                 << std::endl;
         }
 
+        alDistanceModel(AL_LINEAR_DISTANCE);
         alGenSources((ALuint)1, &source);
+
+        alSourcef(source, AL_ROLLOFF_FACTOR, 1.0f);
+        alSourcei(source, AL_SOURCE_RELATIVE, AL_TRUE);
+        alSourcef(source, AL_REFERENCE_DISTANCE, 0.0f);
+
+        alSourcef(source, AL_MAX_DISTANCE, 10.0f);
+        alSourcef(source, AL_MAX_GAIN, 1.0f);
+        alSourcef(source, AL_MIN_GAIN, 0.0f);
+
+        // omni directional
+        alSource3f(source, AL_DIRECTION, 0.0f, 0.0f, 0.0f);
+
         //alGenBuffers(1, &buffer);
 
         //alutLoadWAVFile(file, &format, &data, &size, &freq, &loop);
@@ -177,6 +191,16 @@ namespace ChipGen
     /**************
     *  LISTENER  *
     **************/
+
+    void Listener::setPitch(float pitch)
+    {
+        alListenerf(AL_PITCH, pitch);
+    }
+
+    void Listener::setGain(float gain)
+    {
+        alListenerf(AL_GAIN, gain);
+    }
     
     void Listener::setPosition(float x, float y, float z)
     {

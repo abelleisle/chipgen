@@ -75,6 +75,8 @@ namespace ChipGen
     {
         private:
         public:
+            void setPitch(float);
+            void setGain(float);
             void setPosition(float, float, float);
             void setVelocity(float, float, float);
             void setOrientation(float[]);
